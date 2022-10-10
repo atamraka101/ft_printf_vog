@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:27:53 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 18:39:40 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:36:10 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int	parse_length_modifier(const char *format, t_printf_spec *spec, int pos)
 		ret = 2;
 	}
 	else if (format[pos] == 'l' && format[pos + 1] != 'l')
-		spec->len_modifier = LM_HH;
+		spec->len_modifier = LM_L;
 	else if (format[pos] == 'l' && format[pos + 1] == 'l')
 	{
 		spec->len_modifier = LM_LL;
