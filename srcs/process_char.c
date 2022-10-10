@@ -6,9 +6,11 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:38:49 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/09 20:08:46 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:07:47 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_printf.h"
 
 /*
 ** width determines the size of print value,
@@ -16,8 +18,6 @@
 ** (right justification.).
 ** If '-' Flag is set, value is printed only after padding. (Left justification)
 */
-
-#include "ft_printf.h"
 
 int	ft_process_char(va_list args, t_printf_spec *spec)
 {

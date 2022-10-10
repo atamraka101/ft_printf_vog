@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:27:53 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/09 20:08:33 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:39:40 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,6 @@ int	is_flag(const char c)
 	if (c == '#' || c == '0' || c == '-' || c == '+' || c == ' ')
 		return (1);
 	return (0);
-}
-
-/*
-** This function returns the number of chars that represents a number
-** in the given string
-*/
-
-int	ft_count_nums(const char *str)
-{
-	int	n;
-
-	n = 0;
-	while (ft_isdigit(str[n]))
-		n++;
-	return (n);
 }
 
 /*
@@ -120,7 +105,7 @@ int	parse_precision(const char *format, va_list args, \
 			spec->precision = va_arg(args, int);
 			if (spec->precision < 0)
 				spec->precision = 0;
-			return (1);
+			return (2);
 		}
 		if (!ft_isdigit(format[pos + 1]))
 		{
@@ -132,59 +117,33 @@ int	parse_precision(const char *format, va_list args, \
 			spec->precision = ft_atoi(&format[pos + 1]);
 			return (ft_count_nums(&format[pos + 1]) + 1);
 		}
-		return (0);
 	}
-	/*if (format[pos] == '.')
-	{
-		if (format[pos + 1] == '*')
-		{
-			spec->precision = va_arg(args, int);
-			if (spec->precision < 0)
-				spec->precision = 0;
-			return (1);
-		}
-		if (!ft_isdigit(format[pos + 1]))
-		{
-			spec->precision = 0;
-			return (1);
-		}
-		else
-		{
-			spec->precision = ft_atoi(&format[pos + 1]);
-			return (ft_count_nums(&format[pos + 1]) + 1);
-		}
-	}*/
 	return (0);
 }
 
 int	parse_length_modifier(const char *format, t_printf_spec *spec, int pos)
 {
-	if (!*format)
+	int	ret;
+
+	ret = 1;
+	if (!*format || (format[pos] != 'h' && format[pos] != 'l' \
+		&& format[pos] != 'L'))
 		return (0);
 	if (format[pos] == 'h' && format[pos + 1] != 'h')
-	{
 		spec->len_modifier = LM_H;
-		return (1);
-	}
 	else if (format[pos] == 'h' && format[pos + 1] == 'h')
 	{
 		spec->len_modifier = LM_HH;
-		return (2);
+		ret = 2;
 	}
 	else if (format[pos] == 'l' && format[pos + 1] != 'l')
-	{
-		spec->len_modifier = LM_L;
-		return (1);
-	}
+		spec->len_modifier = LM_HH;
 	else if (format[pos] == 'l' && format[pos + 1] == 'l')
 	{
 		spec->len_modifier = LM_LL;
-		return (2);
+		ret = 2;
 	}
 	else if (format[pos] == 'L')
-	{
 		spec->len_modifier = LM_LD;
-		return (1);
-	}
-	return (0);
+	return (ret);
 }

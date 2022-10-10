@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 13:05:44 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/08 13:35:29 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/10 20:14:45 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ int						ft_process_float_err(long double n, \
 int						ft_process_string(va_list args, t_printf_spec *spec);
 int						ft_process_percentage(t_printf_spec *spec);
 int						ft_process_int(va_list args, t_printf_spec *spec);
-int						ft_process_uint(va_list args, t_printf_spec *spec, \
-											int n_base);
+int						ft_process_uint(va_list args, t_printf_spec *spec);
+int						ft_process_hex(va_list args, t_printf_spec *spec);
+int						ft_process_octal(va_list args, t_printf_spec *spec);
 int						ft_process_pointer(va_list args, t_printf_spec *spec);
 int						ft_process_float(va_list args, t_printf_spec *spec);
 
@@ -88,11 +89,12 @@ unsigned long long int	ft_treat_uint_length_modifier(va_list args, \
 														t_printf_spec *spec);
 long double				ft_treat_float_length_modifier(va_list args, \
 														t_printf_spec *spec);
-
+char					*ft_ftoa(long double n, t_printf_spec *spec);
 long double				ft_power_double(long double base, int power);
 long double				ft_round(long double num, int i);
 int						check_sign_float(long double n, \
 											t_printf_spec *spec, char *c);
 int						check_sign(long long int n, \
 									t_printf_spec *spec, char *c);
+int						ft_count_nums(const char *str);
 #endif

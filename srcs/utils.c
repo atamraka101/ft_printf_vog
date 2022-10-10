@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:59:06 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/09 20:09:23 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:44:55 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	check_sign_float(long double n, t_printf_spec *spec, char *c)
 {
 	if (n < 0.0 || spec->fl_plus || spec->fl_space)
 	{
-		if (n < 0.0)
+		if (n < 0.0 || n == -0.0)
 			*c = '-';
 		else if (spec->fl_plus)
 			*c = '+';
@@ -89,4 +89,19 @@ int	check_sign(long long int n, t_printf_spec *spec, char *c)
 	}
 	*c = '\0';
 	return (0);
+}
+
+/*
+** This function returns the number of chars that represents a number
+** in the given string
+*/
+
+int	ft_count_nums(const char *str)
+{
+	int	n;
+
+	n = 0;
+	while (ft_isdigit(str[n]))
+		n++;
+	return (n);
 }

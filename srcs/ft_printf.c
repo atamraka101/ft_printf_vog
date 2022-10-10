@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:04:10 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/09 20:00:20 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/10 20:12:09 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int	ft_conversion(char c, va_list args, t_printf_spec *spec)
 	else if (c == 'd' || c == 'i')
 		return (ft_process_int(args, spec));
 	else if (c == 'u')
-		return (ft_process_uint(args, spec, BASE_DECIMAL));
+		return (ft_process_uint(args, spec));
 	else if (c == 'x' || c == 'X')
-		return (ft_process_uint(args, spec, BASE_HEX));
+		return (ft_process_hex(args, spec));
 	else if (c == 'o')
-		return (ft_process_uint(args, spec, BASE_OCTATE));
+		return (ft_process_octal(args, spec));
 	else if (c == 'p')
 		return (ft_process_pointer(args, spec));
 	else if (c == 'f')
@@ -67,18 +67,11 @@ int	ft_eval_format(const char *format, \
 	return (ret - pos);
 }
 
-int	ft_printf(const char *format, ...)
+int	ft_process_printf(const char *format, va_list args, t_printf_spec *spec)
 {
-	int				i;
-	int				ret;
-	t_printf_spec	*spec;
-	va_list			args;
+	int	i;
+	int	ret;
 
-	spec = (t_printf_spec *)malloc(sizeof(t_printf_spec));
-	if (!spec)
-		return (-1);
-	ft_initialize_spec(spec);
-	va_start(args, format);
 	i = 0;
 	ret = 0;
 	while (format[i])
@@ -94,6 +87,23 @@ int	ft_printf(const char *format, ...)
 			i++;
 		}
 	}
+	return (ret);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	int				i;
+	int				ret;
+	t_printf_spec	*spec;
+	va_list			args;
+
+	spec = (t_printf_spec *)malloc(sizeof(t_printf_spec));
+	if (!spec)
+		return (-1);
+	ft_initialize_spec(spec);
+	va_start(args, format);
+	i = 0;
+	ret = ft_process_printf(format, args, spec);
 	free(spec);
 	va_end(args);
 	return (ret);
