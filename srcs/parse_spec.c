@@ -12,6 +12,10 @@
 
 #include "ft_printf.h"
 
+/*
+** Checks if a given character is a printf flag or not.
+*/
+
 int	is_flag(const char c)
 {
 	if (c == '#' || c == '0' || c == '-' || c == '+' || c == ' ')
@@ -20,7 +24,10 @@ int	is_flag(const char c)
 }
 
 /*
-** considerations: '-' overides '0', '+' overides ' '
+** parses printf flags.
+** considerations: '-' overides '0', and '+' overides ' '
+** returns number of bytes processed as there can be consecutive
+** flags e.g. "#0" 
 */
 
 int	parse_flags(const char *format, t_printf_spec *spec, int pos)
@@ -61,6 +68,7 @@ int	parse_flags(const char *format, t_printf_spec *spec, int pos)
 ** width.
 ** The negative field width case is already handled by '-' flag as '-' preceeds
 ** width.
+** returns number of bytes processed.
 **/
 
 int	parse_width(const char *format, va_list args, t_printf_spec *spec, int pos)
@@ -90,6 +98,7 @@ int	parse_width(const char *format, va_list args, t_printf_spec *spec, int pos)
 ** If the precision is given as just '.', the precision is taken to be
 ** zero.  A negative precision is taken as if the precision were
 ** omitted.
+** returns number of bytes processed.
 */
 
 int	parse_precision(const char *format, va_list args, \
@@ -120,6 +129,11 @@ int	parse_precision(const char *format, va_list args, \
 	}
 	return (0);
 }
+
+/*
+** Parses length modifier 
+** returns number of bytes processed e.g. 'l' one byte, 'll' two bytes
+*/
 
 int	parse_length_modifier(const char *format, t_printf_spec *spec, int pos)
 {

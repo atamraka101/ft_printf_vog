@@ -12,6 +12,11 @@
 
 #include "ft_printf.h"
 
+/*
+** Prints the given unsigned integer as octal string along with
+** Zero padding if necessary.
+*/
+
 int	ft_print_octal(unsigned long long int n, t_printf_spec *spec, int print_len)
 {
 	int	digits;
@@ -27,6 +32,17 @@ int	ft_print_octal(unsigned long long int n, t_printf_spec *spec, int print_len)
 		n_printed += ft_print_unbr_base(n, BASE_OCTATE, BASE_CHARACTERS);
 	return (n_printed);
 }
+
+/*
+** Process padding for the printing number as Octal string.
+** Considerations:
+** - if hash flag is set, the Octal string is prepended
+** with '0' however, when the given number is 0 and precision is not set,
+** octal string  hash flag is not processed i.e. 0 is not prepended.
+** - minus flag '-' determines padding before or after the octal string.
+** in case of padding before, if precision is set then it is always 
+** padded with space ' '. Otherwise '0' flag determines the padding char.
+*/
 
 int	ft_print_padded_octal(unsigned long long int n, t_printf_spec *spec, \
 							int print_len)
@@ -53,6 +69,17 @@ int	ft_print_padded_octal(unsigned long long int n, t_printf_spec *spec, \
 		n_printed += ft_print_pad(0, pad_size);
 	return (n_printed);
 }
+
+/*
+** Processes and prints number as octal string according to the given format
+** Considerations: 
+** - if the number is 0 and the precision is explicit 0
+** nothing is printed
+** - precision influences number of octal string to be printed.
+** if digits in number is less than the given precision, the 
+** digits are prepended with 0s. In such case the hash '#' flag
+** is unset as no extracta '0' needs to be prepended.
+*/
 
 int	ft_process_octal(va_list args, t_printf_spec *spec)
 {

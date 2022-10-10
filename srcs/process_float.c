@@ -12,31 +12,38 @@
 
 #include "ft_printf.h"
 
-char	*process_float_string(long double num, t_printf_spec *spec)
+/*
+** processes the given float number and converts it into a
+** string.
+*/
+
+char	*process_float_string(long double n, t_printf_spec *spec)
 {
 	char		*str;
 	long double	tmp;
 
 	str = NULL;
-	tmp = num * ft_power_double(10, spec->precision);
+	tmp = n * ft_power_double(10, spec->precision);
 	if (tmp - (long long)tmp == 0.5)
 	{
 		if (((long long)tmp % 2 != 1 && spec->len_modifier != LM_LD) \
 			|| ((long long)tmp % 2 != 1 && \
 					spec->len_modifier == LM_LD && spec->precision == 0))
-			num = tmp / ft_power_double(10, spec->precision);
+			n = tmp / ft_power_double(10, spec->precision);
 		else
-			num = ft_round(num, spec->precision);
+			n = ft_round(n, spec->precision);
 	}
 	else
-		num = ft_round(num, spec->precision);
-	str = ft_ftoa(num, spec);
+		n = ft_round(n, spec->precision);
+	str = ft_ftoa(n, spec);
 	return (str);
 }
 
 /*
-** check_sign_float: one byte for sign if needed
-** Get n converted to string
+** Process pad for the printing float.
+** checks and stores the sign of the given number,
+** converts it into positive number before processing.
+** given number 'n' is converted to string
 ** calculate pad size
 ** pad || float
 ** Print sign first, if there is
@@ -69,8 +76,14 @@ int	ft_print_padded_float(long double n, t_printf_spec *spec)
 }
 
 /*
-** Precision determines how many digits after decimal point is printed
-** when precision is not given, it is set to 6 by default
+** Processes and prints float according to the given format.
+** Error conditions:
+** n != n ie. not a number it prints "nan" as error 
+** n = negative infinty (e.g. - x/0.0), prints "-inf"
+** n = infinty (e.g. x/0.0), prints "inf"
+** Considerations:
+** - Precision determines how many digits after decimal point is printed
+**   when precision is not given, it is set to 6 by default
 */
 
 int	ft_process_float(va_list args, t_printf_spec *spec)

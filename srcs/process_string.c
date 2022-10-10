@@ -59,6 +59,7 @@ int	ft_process_float_err(long double n, t_printf_spec *spec)
 }
 
 /*
+** Processes and prints string.
 ** Flag: The converted value is to be left adjusted on the field
 **       boundary.  (The default is right justification.)
 ** Width: An optional decimal digit string (with nonzero first digit)

@@ -12,6 +12,12 @@
 
 #include "ft_printf.h"
 
+/*
+** Calculates and returns the nth power of the
+** given base. nth power is determined by
+** parameter "power"
+*/
+
 long double	ft_power_double(long double base, int power)
 {
 	int			i;
@@ -26,6 +32,10 @@ long double	ft_power_double(long double base, int power)
 	}
 	return (n);
 }
+
+/*
+** Rounds the given double data type.
+*/
 
 long double	ft_round(long double num, int i)
 {

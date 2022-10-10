@@ -12,6 +12,12 @@
 
 #include "ft_printf.h"
 
+
+/*
+** initializes t_printf_spec structure
+** sets every member as empty or 0
+*/
+
 t_printf_spec	*ft_initialize_spec(t_printf_spec *spec)
 {
 	spec->fl_hash = 0;
@@ -28,6 +34,11 @@ t_printf_spec	*ft_initialize_spec(t_printf_spec *spec)
 	return (spec);
 }
 
+/*
+** This functions checks the conversion type and
+** calls corresponding conversion processing functions
+** to print.
+*/
 int	ft_conversion(char c, va_list args, t_printf_spec *spec)
 {
 	spec->conversion = c;
@@ -52,6 +63,14 @@ int	ft_conversion(char c, va_list args, t_printf_spec *spec)
 	return (0);
 }
 
+/*
+** Evaluation function that checks the printf syntax and
+** updates t_printf_spec according to the given
+** format.
+** The overall syntax of a conversion specification is:
+** %[$][flags][width][.precision][length modifier]conversion
+*/
+
 int	ft_eval_format(const char *format, \
 						va_list args, t_printf_spec *spec, int pos)
 {
@@ -66,6 +85,12 @@ int	ft_eval_format(const char *format, \
 	ret += ft_conversion(format[ret], args, spec);
 	return (ret - pos);
 }
+
+/*
+** This functions process given format one byte at a
+** time, it evaluates and process the format when the
+** processed byte is '%' otherwise simply prints the byte. 
+*/
 
 int	ft_process_printf(const char *format, va_list args, t_printf_spec *spec)
 {

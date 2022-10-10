@@ -13,6 +13,7 @@
 #include "ft_printf.h"
 
 /*
+** Processes and prints a given character according to the given format.
 ** width determines the size of print value,
 ** Since char is one byte, rest of the size is padded with SPACE ' '
 ** (right justification.).

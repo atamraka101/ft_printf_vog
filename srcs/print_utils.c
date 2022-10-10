@@ -12,6 +12,11 @@
 
 #include "ft_printf.h"
 
+/*
+** Recursive function that prints given integer
+**
+*/
+
 int	ft_print_nbr(long long int nbr)
 {
 	int	ret;
@@ -29,6 +34,12 @@ int	ft_print_nbr(long long int nbr)
 	return (ret);
 }
 
+/*
+** Recursive function that prints given unsigned integer depending
+** upon given base. BASE 10 for unsigned int, BASE 8 for octal
+** and BASE 16 for HEX.
+*/
+
 int	ft_print_unbr_base(unsigned long long int nbr, int base_n, char *s)
 {
 	int	ret;
@@ -44,12 +55,18 @@ int	ft_print_unbr_base(unsigned long long int nbr, int base_n, char *s)
 	return (ret);
 }
 
-int	ft_print_pad(int zero, int size)
+/*
+** Prints pad bytes of given size 
+** if parameter pad_zero is set, the function pads with '0'
+** otherwise pads with space characters ' '. 
+*/
+
+int	ft_print_pad(int pad_zero, int size)
 {
 	int		i;
 	char	c;
 
-	if (zero)
+	if (pad_zero)
 		c = '0';
 	else
 		c = ' ';

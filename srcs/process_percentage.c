@@ -12,6 +12,12 @@
 
 #include "ft_printf.h"
 
+/*
+** Processes and prints '%'.
+** Flags, width, precision are not considered while
+** processing '%'.
+*/
+
 int	ft_process_percentage(t_printf_spec *spec)
 {
 	spec->tot_len += write(1, "%", 1);
