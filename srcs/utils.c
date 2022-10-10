@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:59:06 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 18:44:55 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:21:39 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ long double	ft_round(long double num, int i)
 
 int	check_sign_float(long double n, t_printf_spec *spec, char *c)
 {
-	if (n < 0.0 || spec->fl_plus || spec->fl_space)
+	if ((n < 0.0) || (n == -0.0) || (spec->fl_plus) || (spec->fl_space))
 	{
-		if (n < 0.0 || n == -0.0)
+		if ((n < 0.0) || (n == -0.0))
 			*c = '-';
 		else if (spec->fl_plus)
 			*c = '+';
