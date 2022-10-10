@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:04:10 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 20:12:09 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:03:37 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	ft_process_printf(const char *format, va_list args, t_printf_spec *spec)
 
 int	ft_printf(const char *format, ...)
 {
-	int				i;
 	int				ret;
 	t_printf_spec	*spec;
 	va_list			args;
@@ -102,7 +101,6 @@ int	ft_printf(const char *format, ...)
 		return (-1);
 	ft_initialize_spec(spec);
 	va_start(args, format);
-	i = 0;
 	ret = ft_process_printf(format, args, spec);
 	free(spec);
 	va_end(args);
