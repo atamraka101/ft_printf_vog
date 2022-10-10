@@ -6,12 +6,11 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:04:10 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 21:03:37 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:24:29 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 /*
 ** initializes t_printf_spec structure
@@ -89,7 +88,7 @@ int	ft_eval_format(const char *format, \
 /*
 ** This functions process given format one byte at a
 ** time, it evaluates and process the format when the
-** processed byte is '%' otherwise simply prints the byte. 
+** processed byte is '%' otherwise simply prints the byte.
 */
 
 int	ft_process_printf(const char *format, va_list args, t_printf_spec *spec)

@@ -6,16 +6,15 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 12:40:57 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 20:13:19 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:26:26 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
 /*
 ** Prints the given unsigned integer  along with
-** Zero padding if necessary. 
+** Zero padding if necessary.
 */
 
 int	ft_print_uint(unsigned long long int n, int print_len)
@@ -36,7 +35,7 @@ int	ft_print_uint(unsigned long long int n, int print_len)
 ** Process padding for the printing unsigned integer.
 ** Considerations:
 ** - minus flag '-' determines padding before or after the hex string.
-** in case of padding before, if precision is set then it is always 
+** in case of padding before, if precision is set then it is always
 ** padded with space ' '. Otherwise '0' flag determines the padding char.
 */
 
@@ -64,11 +63,11 @@ int	ft_print_padded_uint(unsigned long long int n, \
 
 /*
 ** Processes and prints unsigned integer according to the given format
-** Considerations: 
+** Considerations:
 ** - if the number is 0 and the precision is explicit 0
 ** nothing is printed
 ** - precision influences number of digits to be printed.
-** if digits in number is less than the given precision, the 
+** if digits in number is less than the given precision, the
 ** digits are prepended with 0s otherwise the digits in number
 ** is printed
 */
