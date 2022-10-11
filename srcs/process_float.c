@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 12:17:13 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 21:09:38 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 22:42:16 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ int	ft_print_float(char *str, char sign)
 char	*process_float_string(long double n, t_printf_spec *spec)
 {
 	char		*str;
-	long double	tmp;
+	long double	hold;
 
 	str = NULL;
-	tmp = n * ft_power_double(10, spec->precision);
-	if (tmp - (long long)tmp == 0.5)
+	hold = n * ft_power_double(10, spec->precision);
+	if (hold - (long long)hold == 0.5)
 	{
-		if (((long long)tmp % 2 != 1 && spec->len_modifier != LM_LD) \
-			|| ((long long)tmp % 2 != 1 && \
+		if (((long long)hold % 2 != 1 && spec->len_modifier != LM_LD) \
+			|| ((long long)hold % 2 != 1 && \
 					spec->len_modifier == LM_LD && spec->precision == 0))
-			n = tmp / ft_power_double(10, spec->precision);
+			n = hold / ft_power_double(10, spec->precision);
 		else
 			n = ft_round(n, spec->precision);
 	}

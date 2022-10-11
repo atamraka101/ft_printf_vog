@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:26:20 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 12:46:06 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 23:00:47 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_count_digits(long long int nbr)
 	digits = 0;
 	if (nbr == 0)
 		return (1);
-	if (nbr == -9223372036854775807 - 1)
+	if (nbr == (LONG_LONG_MIN - 1))
 		return (19);
 	lln = nbr;
 	if (lln < 0)

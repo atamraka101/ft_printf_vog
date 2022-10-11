@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:49:52 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 21:16:33 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 23:01:34 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_print_int(long long int n, t_printf_spec *spec, int print_len)
 		n_printed += write(1, "0", 1);
 	if (n_printed < print_len)
 	{
-		if (n == (-9223372036854775807 - 1))
+		if (n == (LONG_LONG_MIN - 1))
 			n_printed += write(1, "9223372036854775808", 19);
 		else
 			n_printed += ft_print_nbr(n);

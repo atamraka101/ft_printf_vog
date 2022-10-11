@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 13:05:44 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 21:17:08 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 23:00:39 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define BASE_DECIMAL	10
 # define BASE_OCTATE	8
 # define BASE_HEX		16
+# define LONG_LONG_MIN		-9223372036854775807
 
 typedef struct s_printf_spec
 {
