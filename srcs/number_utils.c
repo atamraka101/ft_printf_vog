@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:26:20 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/09 20:08:29 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:24:15 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** counts the number of digits in a given signed int
-** and retuns the total digits  
+** and retuns the total digits
 */
 
 int	ft_count_digits(long long int nbr)
@@ -38,7 +38,7 @@ int	ft_count_digits(long long int nbr)
 
 /*
 ** counts the number of digits in a given unsigned int
-** and retuns the total digits  
+** and retuns the total digits
 */
 
 int	count_digits_unsig_base(unsigned long long int n, int n_base)
@@ -60,6 +60,7 @@ int	count_digits_unsig_base(unsigned long long int n, int n_base)
 ** Calculates the length of pad that needed to be added
 ** Pad is determined by width - printable characters
 */
+
 int	ft_get_pad_size(int width, int print_len)
 {
 	int	pad_size;

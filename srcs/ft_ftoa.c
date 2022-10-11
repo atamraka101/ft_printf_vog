@@ -6,14 +6,14 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 19:08:05 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 19:08:07 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:24:25 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-** converts the integer digits (before decimal points) of a given float 
+** converts the integer digits (before decimal points) of a given float
 ** to a string
 */
 
@@ -75,14 +75,14 @@ char	*ft_ftoa_frac_digits(long double n, int precision)
 }
 
 /*
-** convetrts the a given float to a string
+** converts the a given float to a string
 ** This function calls two sub-functions:
-** ft_ftoa_int_digits to extract the integer part 
+** ft_ftoa_int_digits to extract the integer part
 ** of the float to string, and ft_ftoa_frac_digits
 ** to extract the integer part of the float.
 ** This function joins the results from two previous
 ** sub-function to convert float to string.
-** Edge case: If precision is explicitly 0 then it 
+** Edge case: If precision is explicitly 0 then it
 ** doesn't print fraction part unless # flag is given,
 ** in which case it simply prints '.' after the integer
 ** part
