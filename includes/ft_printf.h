@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 13:05:44 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 23:00:39 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 23:53:53 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int						ft_count_digits(long long int nbr);
 int						count_digits_unsig_base(unsigned long long int n, \
 													int n_base);
 
-int						ft_print_pad(int zero, int size);
+int						ft_print_pad(int pad_zero, int size);
 int						ft_print_sign_bf_pad(char *sign, t_printf_spec *spec);
 int						ft_get_pad_size(int width, int print_len);
 
