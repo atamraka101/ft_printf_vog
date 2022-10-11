@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:55:02 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 21:13:55 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 23:56:40 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,6 @@ int	ft_print_err(char *err_str, t_printf_spec *spec)
 	if (!spec->fl_minus)
 		n_printed += ft_print_pad(0, pad_size);
 	n_printed += write(1, err_str, print_len);
-	if (spec->fl_minus)
-		n_printed += ft_print_pad(0, pad_size);
-	return (n_printed);
-}
-
-/*
-** Prints error string for pointer error
-** when the given input is NULL: "(nil)" is printed.
-*/
-int	ft_print_pointer_err(t_printf_spec *spec)
-{
-	int	pad_size;
-	int	print_len;
-	int	n_printed;
-
-	n_printed = 0;
-	pad_size = 0;
-	print_len = ft_strlen(ERR_NULL_POINTER);
-	if (spec->width > print_len)
-		pad_size = spec->width - print_len;
-	if (!spec->fl_minus)
-		n_printed += ft_print_pad(0, pad_size);
-	n_printed += write(1, ERR_NULL_POINTER, print_len);
 	if (spec->fl_minus)
 		n_printed += ft_print_pad(0, pad_size);
 	return (n_printed);
