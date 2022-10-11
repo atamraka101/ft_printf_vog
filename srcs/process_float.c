@@ -6,11 +6,27 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 12:17:13 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 15:04:23 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:09:38 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Prints the given signed float along with
+** sign if necessary
+*/
+
+int	ft_print_float(char *str, char sign)
+{
+	int	n_printed;
+
+	n_printed = 0;
+	if (sign != '\0')
+		n_printed += write(1, &sign, 1);
+	n_printed += write(1, str, ft_strlen(str));
+	return (n_printed);
+}
 
 /*
 ** processes the given float number and converts it into a
@@ -59,16 +75,18 @@ int	ft_print_padded_float(long double n, t_printf_spec *spec)
 
 	n_printed = 0;
 	print_len = check_sign_float(n, spec, &sign);
-	if (print_len)
+	if (sign == '-')
 		n *= -1;
 	str = process_float_string(n, spec);
 	print_len += ft_strlen(str);
 	pad_size = ft_get_pad_size(spec->width, print_len);
 	if (!spec->fl_minus)
-		n_printed += ft_print_pad(0, pad_size);
-	if (sign != '\0')
-		n_printed += write(1, &sign, 1);
-	n_printed += write(1, str, ft_strlen(str));
+	{
+		if ((sign != '\0') && spec->fl_zero)
+			n_printed += ft_print_sign_bf_pad(&sign, spec);
+		n_printed += ft_print_pad(spec->fl_zero, pad_size);
+	}
+	n_printed += ft_print_float(str, sign);
 	if (spec->fl_minus)
 		n_printed += ft_print_pad(0, pad_size);
 	free(str);

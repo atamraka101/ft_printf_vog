@@ -6,11 +6,34 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:49:52 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 12:47:33 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:16:33 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** checks if we need to add sign in front of integer value
+** sign is added if given number is negative i.e. n < 0, or
+** if PLUS '+' flag is set
+** We also need to add a space, if SPACE ' ' flag is set
+*/
+
+int	check_sign(long long int n, t_printf_spec *spec, char *c)
+{
+	if (n < 0 || spec->fl_plus || spec->fl_space)
+	{
+		if (n < 0)
+			*c = '-';
+		else if (spec->fl_plus)
+			*c = '+';
+		else
+			*c = ' ';
+		return (1);
+	}
+	*c = '\0';
+	return (0);
+}
 
 /*
 ** Prints the given signed integer along with
@@ -41,21 +64,6 @@ int	ft_print_int(long long int n, t_printf_spec *spec, int print_len)
 }
 
 /*
-** A sub function to simply print signs prior to padding
-** with zero. The functions unsets plus and space flags
-** for further processing.
-*/
-int	ft_print_sign_bf_pad(char sign, t_printf_spec *spec)
-{
-	int	n_printed;
-
-	n_printed = write(1, &sign, 1);
-	spec->fl_plus = 0;
-	spec->fl_space = 0;
-	return (n_printed);
-}
-
-/*
 ** Process padding for the printing signed int.
 ** Considerations:
 ** check for negative sign and explicit '+' sign based on '#' flag
@@ -81,7 +89,7 @@ int	ft_print_padded_int(long long int n, t_printf_spec *spec, int print_len)
 	{
 		if ((sign != '\0') & spec->fl_zero && !spec->precision)
 		{
-			n_printed += ft_print_sign_bf_pad(sign, spec);
+			n_printed += ft_print_sign_bf_pad(&sign, spec);
 			if (n < 0)
 				n = n * (-1);
 			print_len--;

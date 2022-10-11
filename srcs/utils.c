@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:59:06 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 21:21:39 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:16:26 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ long double	ft_power_double(long double base, int power)
 ** Rounds the given double data type.
 */
 
-long double	ft_round(long double num, int i)
+long double	ft_round(long double n, int i)
 {
-	long double	round_num;
+	long double	round_n;
 	long double	dec;
 
 	dec = 0.5;
@@ -48,11 +48,28 @@ long double	ft_round(long double num, int i)
 		dec = dec / 10;
 		i--;
 	}
-	if (num >= 0)
-		round_num = num + dec;
+	if (n >= 0)
+		round_n = n + dec;
 	else
-		round_num = num - dec;
-	return (round_num);
+		round_n = n - dec;
+	return (round_n);
+}
+
+/*
+** Function to check if given double is negative
+**
+*/
+int	ft_is_neg(double n)
+{
+	long long int	*hold;
+	char			sign;
+
+	hold = (long long int *)&n;
+	sign = (char)(*hold >> 63);
+	if (sign == 0)
+		return (0);
+	else
+		return (1);
 }
 
 /*
@@ -64,32 +81,9 @@ long double	ft_round(long double num, int i)
 
 int	check_sign_float(long double n, t_printf_spec *spec, char *c)
 {
-	if ((n < 0.0) || (n == -0.0) || (spec->fl_plus) || (spec->fl_space))
+	if (ft_is_neg(n) || (spec->fl_plus) || (spec->fl_space))
 	{
-		if ((n < 0.0) || (n == -0.0))
-			*c = '-';
-		else if (spec->fl_plus)
-			*c = '+';
-		else
-			*c = ' ';
-		return (1);
-	}
-	*c = '\0';
-	return (0);
-}
-
-/*
-** checks if we need to add sign in front of integer value
-** sign is added if given number is negative i.e. n < 0, or
-** if PLUS '+' flag is set
-** We also need to add a space, if SPACE ' ' flag is set
-*/
-
-int	check_sign(long long int n, t_printf_spec *spec, char *c)
-{
-	if (n < 0 || spec->fl_plus || spec->fl_space)
-	{
-		if (n < 0)
+		if (ft_is_neg(n))
 			*c = '-';
 		else if (spec->fl_plus)
 			*c = '+';

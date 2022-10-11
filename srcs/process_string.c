@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:55:02 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 15:04:15 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:13:55 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ int	ft_print_err(char *err_str, t_printf_spec *spec)
 	n_printed = 0;
 	pad_size = 0;
 	print_len = ft_strlen(err_str);
-	if (spec->dot && (spec->precision < print_len))
-		print_len = 0;
-	else if (spec->dot && (print_len > spec->precision))
+	if (spec->dot && (print_len > spec->precision))
 		print_len = spec->precision;
 	if (spec->width > print_len)
 		pad_size = spec->width - print_len;
@@ -53,7 +51,6 @@ int	ft_print_pointer_err(t_printf_spec *spec)
 	n_printed = 0;
 	pad_size = 0;
 	print_len = ft_strlen(ERR_NULL_POINTER);
-
 	if (spec->width > print_len)
 		pad_size = spec->width - print_len;
 	if (!spec->fl_minus)

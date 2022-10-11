@@ -6,12 +6,11 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 19:07:50 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 15:06:19 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:24:44 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 /*
 ** Function to print hex symbol "0x" or "0X"
@@ -23,7 +22,7 @@ int	ft_print_symbol(t_printf_spec *spec)
 
 	n_printed = 0;
 	if (!spec->fl_hash)
-		return(0);
+		return (0);
 	if (spec->conversion == 'x')
 		n_printed += write(1, "0x", 2);
 	else if (spec->conversion == 'X')
@@ -84,17 +83,15 @@ int	ft_print_padded_hex(unsigned long long int n, t_printf_spec *spec, \
 	pad_size = ft_get_pad_size(spec->width, print_len);
 	if (!spec->fl_minus)
 	{
-		if (spec->dot)
-			n_printed += ft_print_pad(0, pad_size);
-		else if (pad_size)
+		if (pad_size)
 		{
 			if (n != 0 && spec->fl_hash && spec->fl_zero)
 			{
 				n_printed += ft_print_symbol(spec);
 				print_len -= 2;
 			}
-			n_printed += ft_print_pad(spec->fl_zero, pad_size);
 		}
+		n_printed += ft_print_pad(spec->fl_zero, pad_size);
 	}
 	n_printed += ft_print_hex(n, spec, print_len);
 	if (spec->fl_minus)
@@ -124,41 +121,12 @@ int	ft_process_hex(va_list args, t_printf_spec *spec)
 	else
 		digits = count_digits_unsig_base(n, BASE_HEX);
 	print_len = digits;
-	if (spec->dot && (digits < spec->precision))
-		print_len = spec->precision;
-	spec->tot_len += ft_print_padded_hex(n, spec, print_len);
-	return (1);
-}
-
-/*
-** Processes and prints pointer according to the given format
-** Pointers are printed as hex 'x' therefore reuses sub-functions
-** for printing hex.
-** Considerations:
-** - if the supplied pointer is NULL, it prints
-** string "(nil)" as an error.
-** - if the pointer is 0 and the precision is explicit 0
-** nothing is printed
-*/
-
-int	ft_process_pointer(va_list args, t_printf_spec *spec)
-{
-	unsigned long	n;
-	int				digits;
-	int				print_len;
-
-	n = (unsigned long int)va_arg(args, unsigned long int);
-	if (!n || (n == 0))
+	if (spec->dot)
 	{
-		spec->tot_len += ft_print_pointer_err(spec);
-		return (1);
+		if (digits < spec->precision)
+			print_len = spec->precision;
+		spec->fl_zero = 0;
 	}
-	digits = count_digits_unsig_base(n, BASE_HEX);
-	print_len = digits;
-	if (spec->dot && (digits < spec->precision))
-		print_len = spec->precision;
-	spec->fl_hash = 1;
-	spec->conversion = 'x';
 	spec->tot_len += ft_print_padded_hex(n, spec, print_len);
 	return (1);
 }

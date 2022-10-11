@@ -21,7 +21,7 @@ int main()
 	ft_printf("|%c|\n", 'A');
 	printf("\n");
 	printf("|%10.c|\n", 'A');
-	ft_printf("|%10c|\n", 'A');
+	ft_printf("|%10.c|\n", 'A');
 	printf("\n");
 	printf("|%-10.c|\n", 'A');
 	ft_printf("|%-10c|\n", 'A');

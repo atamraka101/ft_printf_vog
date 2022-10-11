@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:33:23 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 09:28:06 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:01:13 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,20 @@ int	ft_print_pad(int pad_zero, int size)
 		i++;
 	}
 	return (i);
+}
+
+/*
+** A sub function to simply print signs prior to padding
+** with zero. The functions unsets plus and space flags
+** for further processing.
+*/
+int	ft_print_sign_bf_pad(char *sign, t_printf_spec *spec)
+{
+	int	n_printed;
+
+	n_printed = write(1, sign, 1);
+	spec->fl_plus = 0;
+	spec->fl_space = 0;
+	*sign = '\0';
+	return (n_printed);
 }

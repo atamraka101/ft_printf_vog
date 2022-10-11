@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:27:53 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 21:36:10 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:10:46 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_flag(const char c)
 ** parses printf flags.
 ** considerations: '-' overides '0', and '+' overides ' '
 ** returns number of bytes processed as there can be consecutive
-** flags e.g. "#0" 
+** flags e.g. "#0"
 */
 
 int	parse_flags(const char *format, t_printf_spec *spec, int pos)
@@ -73,6 +73,9 @@ int	parse_flags(const char *format, t_printf_spec *spec, int pos)
 
 int	parse_width(const char *format, va_list args, t_printf_spec *spec, int pos)
 {
+	int	ret;
+
+	ret = 0;
 	if (!*format)
 		return (0);
 	if (format[pos] == '*')
@@ -83,13 +86,15 @@ int	parse_width(const char *format, va_list args, t_printf_spec *spec, int pos)
 			spec->width *= -1;
 			spec->fl_minus = 1;
 		}
-		return (1);
+		pos++;
+		ret++;
 	}
-	else
+	if (ft_isdigit(format[pos]))
 	{
 		spec->width = ft_atoi(&format[pos]);
-		return (ft_count_nums(&format[pos]));
+		ret += ft_count_nums(&format[pos]);
 	}
+	return (ret);
 }
 
 /*
@@ -104,34 +109,33 @@ int	parse_width(const char *format, va_list args, t_printf_spec *spec, int pos)
 int	parse_precision(const char *format, va_list args, \
 						t_printf_spec *spec, int pos)
 {
-	if (!*format)
+	if (!*format || format[pos] != '.')
 		return (0);
-	if (format[pos] == '.')
+	spec->dot = 1;
+	if (format[pos + 1] == '*')
 	{
-		spec->dot = 1;
-		if (format[pos + 1] == '*')
-		{
-			spec->precision = va_arg(args, int);
-			if (spec->precision < 0)
-				spec->precision = 0;
-			return (2);
-		}
-		if (!ft_isdigit(format[pos + 1]))
+		spec->precision = va_arg(args, int);
+		if (spec->precision < 0)
 		{
 			spec->precision = 0;
-			return (1);
+			spec->dot = 0;
 		}
-		else
-		{
-			spec->precision = ft_atoi(&format[pos + 1]);
-			return (ft_count_nums(&format[pos + 1]) + 1);
-		}
+		return (2);
 	}
-	return (0);
+	else if (!ft_isdigit(format[pos + 1]))
+	{
+		spec->precision = 0;
+		return (1);
+	}
+	else
+	{
+		spec->precision = ft_atoi(&format[pos + 1]);
+		return (ft_count_nums(&format[pos + 1]) + 1);
+	}
 }
 
 /*
-** Parses length modifier 
+** Parses length modifier
 ** returns number of bytes processed e.g. 'l' one byte, 'll' two bytes
 */
 

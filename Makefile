@@ -6,7 +6,7 @@
 #    By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 19:27:33 by atamraka          #+#    #+#              #
-#    Updated: 2022/10/10 20:31:16 by atamraka         ###   ########.fr        #
+#    Updated: 2022/10/11 18:00:47 by atamraka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT = ./libft
 SRCS = ft_printf.c ft_ftoa.c print_utils.c process_length_modifier.c  \
 		process_string.c ft_printf.c process_char.c process_numbers.c \
 		process_uint.c number_utils.c process_float.c process_octal.c utils.c \
-		parse_spec.c process_hex.c process_percentage.c
+		parse_spec.c process_hex.c process_percentage.c process_pointer.c
 
 SRCS_PATH = srcs/
 SRCS_FULL_PATH = $(addprefix $(SRCS_PATH), $(SRCS))
