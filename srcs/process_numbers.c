@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:49:52 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/11 23:01:34 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:03:39 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,14 @@ int	ft_print_padded_int(long long int n, t_printf_spec *spec, int print_len)
 	fill_size = ft_get_pad_size(spec->width, print_len);
 	if (!spec->fl_minus)
 	{
-		if ((sign != '\0') & spec->fl_zero && !spec->precision)
+		if ((sign != '\0') & spec->fl_zero && !spec->dot)
 		{
 			n_printed += ft_print_sign_bf_pad(&sign, spec);
 			if (n < 0)
 				n = n * (-1);
 			print_len--;
 		}
-		if (spec->precision)
+		if (spec->dot)
 			n_printed += ft_print_pad(0, fill_size);
 		else
 			n_printed += ft_print_pad(spec->fl_zero, fill_size);
