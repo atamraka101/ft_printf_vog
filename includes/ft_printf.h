@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 13:05:44 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 20:14:45 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:04:03 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int						parse_length_modifier(const char *format, \
 
 int						ft_process_char(va_list args, t_printf_spec *spec);
 int						ft_print_err(char *str, t_printf_spec *spec);
-int						ft_process_float_err(long double n, \
+int						ft_print_pointer_err(t_printf_spec *spec);
+int						ft_print_float_err(long double n, \
 												t_printf_spec *spec);
 int						ft_process_string(va_list args, t_printf_spec *spec);
 int						ft_process_percentage(t_printf_spec *spec);

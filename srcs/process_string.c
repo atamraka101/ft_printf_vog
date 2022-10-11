@@ -6,16 +6,15 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:55:02 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/09 20:09:10 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:04:15 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-** Prints error string
-** For String type: when the give input is NULL: "(null)" is printed
-** For pointer, when the given input is NULL: "(nil)" is printed.
+** Prints error string for string type:
+** when the give input is NULL: "(null)" is printed
 */
 
 int	ft_print_err(char *err_str, t_printf_spec *spec)
@@ -42,11 +41,35 @@ int	ft_print_err(char *err_str, t_printf_spec *spec)
 }
 
 /*
+** Prints error string for pointer error
+** when the given input is NULL: "(nil)" is printed.
+*/
+int	ft_print_pointer_err(t_printf_spec *spec)
+{
+	int	pad_size;
+	int	print_len;
+	int	n_printed;
+
+	n_printed = 0;
+	pad_size = 0;
+	print_len = ft_strlen(ERR_NULL_POINTER);
+
+	if (spec->width > print_len)
+		pad_size = spec->width - print_len;
+	if (!spec->fl_minus)
+		n_printed += ft_print_pad(0, pad_size);
+	n_printed += write(1, ERR_NULL_POINTER, print_len);
+	if (spec->fl_minus)
+		n_printed += ft_print_pad(0, pad_size);
+	return (n_printed);
+}
+
+/*
 ** Prints error string for float type
 ** [-]inf or nan
 */
 
-int	ft_process_float_err(long double n, t_printf_spec *spec)
+int	ft_print_float_err(long double n, t_printf_spec *spec)
 {
 	if (n != n)
 		return (ft_print_err(ERR_NAN, spec));

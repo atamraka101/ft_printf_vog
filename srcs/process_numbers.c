@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:49:52 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 19:04:33 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:47:33 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,12 @@ int	ft_print_int(long long int n, t_printf_spec *spec, int print_len)
 	while ((n_printed + digits) < print_len)
 		n_printed += write(1, "0", 1);
 	if (n_printed < print_len)
-		n_printed += ft_print_nbr(n);
+	{
+		if (n == (-9223372036854775807 - 1))
+			n_printed += write(1, "9223372036854775808", 19);
+		else
+			n_printed += ft_print_nbr(n);
+	}
 	return (n_printed);
 }
 
@@ -55,7 +60,7 @@ int	ft_print_sign_bf_pad(char sign, t_printf_spec *spec)
 ** Considerations:
 ** check for negative sign and explicit '+' sign based on '#' flag
 ** - minus flag '-' determines padding before or after the hex string.
-** in case of padding before, if precision is set then it is always 
+** in case of padding before, if precision is set then it is always
 ** padded with space ' '. Otherwise '0' flag determines the padding char.
 ** output conditions:
 ** pad || number
@@ -94,11 +99,11 @@ int	ft_print_padded_int(long long int n, t_printf_spec *spec, int print_len)
 
 /*
 ** Processes and prints signed integer according to the given format
-** Considerations: 
+** Considerations:
 ** - if the number is 0 and the precision is explicit 0
 ** nothing is printed
 ** - precision influences number of digits to be printed.
-** if digits in number is less than the given precision, the 
+** if digits in number is less than the given precision, the
 ** digits are prepended with 0s
 */
 

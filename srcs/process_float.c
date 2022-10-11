@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 12:17:13 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/10 18:48:33 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:04:23 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_print_padded_float(long double n, t_printf_spec *spec)
 /*
 ** Processes and prints float according to the given format.
 ** Error conditions:
-** n != n ie. not a number it prints "nan" as error 
+** n != n ie. not a number it prints "nan" as error
 ** n = negative infinty (e.g. - x/0.0), prints "-inf"
 ** n = infinty (e.g. x/0.0), prints "inf"
 ** Considerations:
@@ -93,7 +93,7 @@ int	ft_process_float(va_list args, t_printf_spec *spec)
 	n = ft_treat_float_length_modifier(args, spec);
 	if ((n != n) || (n == -1.0 / 0.0) || (n == 1.0 / 0.0))
 	{
-		spec->tot_len += ft_process_float_err(n, spec);
+		spec->tot_len += ft_print_float_err(n, spec);
 		return (1);
 	}
 	if (!spec->dot)
