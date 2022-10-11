@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:33:23 by atamraka          #+#    #+#             */
-/*   Updated: 2022/10/09 20:08:39 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:28:06 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /*
 ** Recursive function that prints given integer
-**
 */
 
 int	ft_print_nbr(long long int nbr)
@@ -56,9 +55,9 @@ int	ft_print_unbr_base(unsigned long long int nbr, int base_n, char *s)
 }
 
 /*
-** Prints pad bytes of given size 
+** Prints pad bytes of given size
 ** if parameter pad_zero is set, the function pads with '0'
-** otherwise pads with space characters ' '. 
+** otherwise pads with space characters ' '.
 */
 
 int	ft_print_pad(int pad_zero, int size)
