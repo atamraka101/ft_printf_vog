@@ -161,7 +161,7 @@ int main()
 	printf("|%lld|\n", 9223372036854775807LL);
 	ft_printf("|%lld|\n", 9223372036854775807LL);
 	printf("\n");
-	printf("|%d|\n", 2147483649L);
+	//printf("|%d|\n", 2147483649L);
 	ft_printf("|%d|\n", 2147483649L);
 	printf("\n");
 	printf("|%ld|\n", 2147483649L);
@@ -182,7 +182,7 @@ int main()
 	printf("|%-4u|\n", 42);
 	ft_printf("|%-4u|\n", 42);
 	printf("\n");
-	printf("|%+4u|\n", 42);
+	//printf("|%+4u|\n", 42);
 	ft_printf("|%+4u|\n", 42);
 	printf("\n");
 	printf("|%.8u|\n", 42);
@@ -200,10 +200,10 @@ int main()
 	printf("|%10.u|\n", 42);
 	ft_printf("|%10.u|\n", 42);
 	printf("\n");
-	printf("|%u|\n", 4294967295);
+	//printf("|%u|\n", 4294967295);
 	ft_printf("|%u|\n", 4294967295);
 	printf("\n");
-	printf("|%u|\n", 4294967296);
+	//printf("|%u|\n", 4294967296);
 	ft_printf("|%u|\n", 4294967296);
 	printf("\n");
 	printf("|%lu|\n", 4294967296L);
@@ -672,7 +672,7 @@ int main()
 	printf("|%30p|\n", &p);
 	ft_printf("|%30p|\n", &p);
 	printf("\n");
-	printf("|%030p|\n", &p);
+	//printf("|%030p|\n", &p);
 	ft_printf("|%030p|\n", &p);
 	printf("\n");
 	printf("|%p|\n", NULL);

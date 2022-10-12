@@ -6,19 +6,19 @@
 #    By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 19:27:33 by atamraka          #+#    #+#              #
-#    Updated: 2022/10/11 18:00:47 by atamraka         ###   ########.fr        #
+#    Updated: 2022/10/12 12:23:03 by atamraka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 CC = gcc
-FLAGS = -c -Wall -Werror -Wextra
-INCLUDES = -I ./includes -I ./libft
+FLAGS = -Wall -Werror -Wextra -c
+INCLUDES = -I./includes -I./libft
 
-LIBFT = ./libft
+LIBFT = libft/
 
-SRCS = ft_printf.c ft_ftoa.c print_utils.c process_length_modifier.c  \
+SRCS =	ft_printf.c ft_ftoa.c print_utils.c process_length_modifier.c  \
 		process_string.c ft_printf.c process_char.c process_numbers.c \
 		process_uint.c number_utils.c process_float.c process_octal.c utils.c \
 		parse_spec.c process_hex.c process_percentage.c process_pointer.c
@@ -41,20 +41,25 @@ LIBFT_OBJ = $(addprefix libft/, ft_atoi.o ft_bzero.o ft_isalnum.o \
 			ft_toupper.o ft_abs.o ft_div_mod.o ft_lst_delcontent.o \
 			ft_strndup.o ft_swap.o)
 
-
-
-OBJ = $(SRCS:.c=.o)
-
+OBJ_DIR = objs/
+OBJ = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
 all: $(NAME)
 
-$(NAME):
-		@make -C $(LIBFT)
-		@$(CC) $(FLAGS) $(INCLUDES) $(SRCS_FULL_PATH)
+$(NAME): $(OBJ_DIR) $(OBJ)
 		@ar rc $(NAME) $(OBJ) $(LIBFT_OBJ)
+		@echo "libftprintf.a compiled."
+
+$(OBJ_DIR):
+		@make -C $(LIBFT)
+		@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)%.o: $(SRCS_PATH)%.c
+		@$(CC) $(FLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:
 		@rm -f $(OBJ)
+		@rm -rf $(OBJ_DIR)
 		@make -C $(LIBFT) clean
 
 fclean: clean
